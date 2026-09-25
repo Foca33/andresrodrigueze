@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #060606;
+  --color-coal: #0d0d0c;
+  --color-ash: #191918;
+  --color-graphite: #2a2927;
+  --color-smoke: #a19d95;
+  --color-fog: #8c8880;
+  --color-bone: #ece6da;
+  --color-paper: #f2ede3;
+  --color-skin: #c8a58e;
+  /* THE accent: thriller red. Key points only — the time of the crime, the live dot, the hover of the
+     main CTA, the rank, the "próximamente" tag, hairlines. Never wallpaper. */
+  --color-ember: #ea3038;
+  /* same red, deepened to keep contrast on the paper-coloured sections */
+  --color-blood-deep: #b3141c;
+
+  /* Josefin Sans = the cover's lettering (ExtraLight, wide-tracked caps). Newsreader = reading text. */
+  --font-display: var(--font-josefin), "Century Gothic", Futura, "Avenir Next", system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-mono: var(--font-josefin), "Century Gothic", Futura, "Avenir Next", system-ui, sans-serif;
+
+  --spacing-gutter: clamp(1.25rem, 4vw, 4rem);
+  --ease-cine: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background: var(--color-ink);
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-bone);
+  color: var(--color-ink);
+}
+
+/* ---------- type primitives ---------- */
+.display {
+  font-family: var(--font-display);
+  font-weight: 200;
+  letter-spacing: -0.005em;
+  line-height: 0.94;
+  text-transform: uppercase;
+}
+.display-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.015em;
+}
+/* labels, nav, buttons, data: the cover's tracked-out Josefin caps */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.rec-dot {
+  animation: rec 2.6s ease-in-out infinite;
+}
+@keyframes rec {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* ---------- focus (visible everywhere) ---------- */
+:focus-visible {
+  outline: 2px solid var(--color-bone);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.on-paper :focus-visible {
+  outline-color: var(--color-ink);
+}
+
+/* ---------- film grain: static, tiled, cheap ---------- */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- hairline ---------- */
+.rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-bone) 28%, transparent) 12%, color-mix(in srgb, var(--color-bone) 28%, transparent) 88%, transparent);
+}
+
+/* dimmed solid type (an outline of a hairline face reads as a double contour) */
+.outline-text {
+  color: color-mix(in srgb, var(--color-bone) 50%, transparent);
+}
+
+/* ---------- CTA arrow (svg) nudge ---------- */
+.cta-arrow {
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.cta:hover .cta-arrow,
+.cta:focus-visible .cta-arrow {
+  transform: translateX(6px);
+}
+
+/* utilities for sticky scenes */
+.svh {
+  height: 100svh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
