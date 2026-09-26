@@ -6,6 +6,8 @@ export interface SubscribePayload {
   firstName?: string;
   /** e.g. "first-chapter" | "newsletter" | "eric" */
   source: string;
+  /** honeypot: only a bot fills this. Forwarded as-is; the server drops the request silently when set. */
+  hp?: string;
 }
 
 export interface SubscribeResult {

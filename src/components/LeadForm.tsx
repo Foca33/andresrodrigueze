@@ -51,9 +51,10 @@ export function LeadForm({
     const fd = new FormData(e.currentTarget);
     const email = String(fd.get("email") ?? "").trim();
     const firstName = String(fd.get("firstName") ?? "").trim() || undefined;
+    const hp = String(fd.get("company") ?? "").trim() || undefined;
     if (!isValidEmail(email)) return setStatus("invalid");
     setStatus("sending");
-    const res = await subscribe({ email, firstName, source });
+    const res = await subscribe({ email, firstName, source, hp });
     setSimulated(res.simulated);
     setStatus(res.ok ? "ok" : "error");
     if (res.ok) track(event, { source, simulated: res.simulated });
@@ -78,6 +79,17 @@ export function LeadForm({
 
   return (
     <form onSubmit={onSubmit} noValidate className={className} aria-busy={status === "sending"}>
+        {/* honeypot: hidden from sighted users and screen readers, invisible to a real visitor's tab order.
+            Most form-spam bots fill every field they find, including this one. */}
+        <input
+          type="text"
+          name="company"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="pointer-events-none absolute h-0 w-0 opacity-0"
+          style={{ left: "-9999px" }}
+        />
       <div className={cn("grid gap-6", layout === "inline" ? "md:grid-cols-[1fr_auto] md:items-end" : "")}>
         <div className="grid gap-6">
           {strings.firstName && (

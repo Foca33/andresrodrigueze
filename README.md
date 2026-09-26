@@ -9,6 +9,57 @@ npm run build && npm start
 npm run lint     # tsc --noEmit
 ```
 
+## Publicar el sitio (Netlify, gratis) + www.andresrodrigueze.com
+
+**Por qué Netlify y no Vercel:** Vercel es más simple de usar, pero su plan gratuito ("Hobby") prohíbe explícitamente el "uso comercial" — y eso incluye "anunciar la venta de un producto o servicio", que es justo lo que hace la sección de Ediciones. Con esto necesitarías el plan de pago (US$20/mes). Netlify no tiene esa restricción en su plan gratuito, soporta Next.js igual de bien (detecta el proyecto solo, corre `/api/subscribe` como función) y el dominio propio con HTTPS también es gratis. Por eso el repo trae `netlify.toml` en vez de config de Vercel.
+
+### 1. Subir el código a GitHub
+```
+cd hela-site
+git remote add origin https://github.com/TU_USUARIO/hela-site.git
+git branch -M main
+git push -u origin main
+```
+(Si no tienes repo creado: en github.com → "New repository" → sin README, sin licencia → copia la URL que te da y úsala arriba.)
+
+### 2. Conectar Netlify
+1. Crea cuenta en netlify.com (con tu cuenta de GitHub, es un clic).
+2. "Add new site" → "Import an existing project" → GitHub → elige `hela-site`.
+3. Netlify detecta Next.js solo. Deja el build command que trae `netlify.toml` (`npm run build`) y dale "Deploy".
+4. Cuando termine, te da una URL tipo `algo-al-azar.netlify.app` — ábrela y confirma que el sitio carga.
+
+### 3. Variables de entorno
+En el sitio dentro de Netlify: **Site configuration → Environment variables** → agrega:
+- `NEXT_PUBLIC_SITE_URL` = `https://www.andresrodrigueze.com`
+- `NEXT_PUBLIC_INDEXABLE` = `true` (el día que quieras que Google indexe el sitio)
+- `NEXT_PUBLIC_SHOW_PLACEHOLDERS` = `false` (cuando ya no haya nada provisional)
+- `NEXT_PUBLIC_NEWSLETTER_ENDPOINT` = `/api/subscribe`
+- `BREVO_API_KEY` y `BREVO_LIST_ID` — ver sección de Brevo abajo
+
+Después de agregarlas: **Deploys → Trigger deploy → Deploy site** (las variables no aplican hasta el siguiente deploy).
+
+### 4. Conectar el dominio
+1. **Site configuration → Domain management → Add a domain** → escribe `andresrodrigueze.com`.
+2. Netlify te muestra los registros DNS exactos a crear en el sitio donde compraste el dominio (GoDaddy, Namecheap, etc.). Normalmente es un registro A para el dominio raíz y un CNAME para `www`. Sigue exactamente lo que te muestre esa pantalla — varía un poco según el registrador.
+3. La propagación puede tardar de minutos a un par de horas. Netlify emite el certificado HTTPS solo, apenas detecta el DNS correcto.
+4. En la misma pantalla, marca `www.andresrodrigueze.com` (o el dominio raíz, tú decides) como dominio principal; el otro queda redirigido automáticamente.
+
+### 5. Brevo (email marketing)
+Por qué Brevo y no MailerLite: MailerLite recortó su plan gratis a 250 contactos — se queda corto si TikTok empieza a traer suscriptores en serio. Brevo gratis da 300 correos/día y hasta 100.000 contactos guardados, con API incluida.
+
+1. Crea cuenta en brevo.com (gratis).
+2. **Contacts → Lists → Create a list**, por ejemplo "HELA — Lectores". Abre la lista: el número en la URL es tu `BREVO_LIST_ID`.
+3. Ícono de engranaje (arriba a la derecha) → **SMTP & API → API Keys → Generate a new API key**. Cópiala una sola vez (no se vuelve a mostrar): es tu `BREVO_API_KEY`.
+4. Pega ambos valores en las variables de entorno de Netlify (paso 3) y vuelve a desplegar.
+5. Prueba: llena cualquiera de los tres formularios del sitio (primer capítulo, newsletter, ERIC) con un correo tuyo → debe aparecer en Brevo → Contacts en segundos.
+
+El endpoint (`src/app/api/subscribe/route.ts`) ya trae:
+- Validación de correo en servidor (no solo en el navegador).
+- Un campo trampa oculto (`honeypot`): si un bot lo llena, el sitio le finge éxito sin gastar tu cupo de 300 correos/día en Brevo.
+- Si el correo ya existe en la lista, lo actualiza en vez de marcar error.
+
+Si con el tiempo el spam se vuelve un problema real, el siguiente paso (no implementado todavía) es añadir Cloudflare Turnstile — es gratis e invisible para el usuario.
+
 ## Assets
 Los originales están en `assets-src/` (`hela-cover.png`, `eric-cover.png`, `andres-portrait.png`). `npm run assets:prepare` genera los JPG optimizados en `public/assets/` (el retrato se convierte a blanco y negro ahí mismo; el original a color se conserva).
 - La portada de HELA original mide 624×992 px: el script la escala 2× con Lanczos, pero al expandirse en el hero se nota suave. Cuando tengas el archivo de alta resolución (el de KDP), reemplaza `assets-src/hela-cover.png` y corre el script.
