@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HELA — Tus dos primeros capítulos</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#060606; --coal:#0d0d0c; --ash:#191918; --graphite:#2a2927;
+    --smoke:#a19d95; --fog:#8c8880; --bone:#ece6da; --paper:#f2ede3;
+    --ember:#ea3038; --blood:#b3141c;
+    --serif:'Newsreader', Georgia, serif;
+    --display:'Josefin Sans', 'Century Gothic', Futura, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--ink);color:var(--bone);}
+  body{font-family:var(--serif);-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 1.5rem;}
+  .hero{
+    min-height:92svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:4rem 1.5rem;gap:1.6rem;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(60% 50% at 50% 30%, rgba(234,48,56,0.12), transparent 70%);
+    pointer-events:none;
+  }
+  .cover{width:min(52vw,220px);box-shadow:0 30px 80px rgba(0,0,0,0.7);border-radius:2px;}
+  .eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:0.3em;font-size:0.7rem;color:var(--smoke);}
+  .surprise{font-family:var(--display);text-transform:uppercase;letter-spacing:0.02em;font-weight:700;
+    font-size:clamp(1.6rem,6vw,2.6rem);line-height:1.15;max-width:20ch;}
+  .surprise .red{color:var(--ember);}
+  .lede{font-family:var(--serif);font-style:italic;color:var(--bone);opacity:0.85;font-size:clamp(1.05rem,3vw,1.25rem);max-width:34ch;}
+  .scrolldown{margin-top:0.5rem;font-family:var(--display);font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--fog);}
+  .scrolldown::after{content:"↓";display:block;margin-top:0.4rem;animation:bob 1.8s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+  .chapter{padding:5.5rem 0 2rem;}
+  .chnum{font-family:var(--display);font-weight:700;font-size:clamp(4rem,16vw,6.5rem);line-height:0.85;color:var(--paper);}
+  .chtitle{font-family:var(--display);text-transform:uppercase;letter-spacing:0.28em;font-size:0.85rem;color:var(--bone);margin-top:0.6rem;}
+  .epigraph{font-style:italic;color:var(--smoke);margin:2.2rem 0 2.4rem;font-size:1.02rem;line-height:1.55;}
+  .meta{font-family:var(--display);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ember);
+    border-top:1px solid var(--graphite);padding-top:1rem;margin-bottom:2.4rem;}
+  p{font-size:1.13rem;line-height:1.85;margin:0 0 1.35rem;color:var(--bone);}
+  p.lead{font-weight:600;text-transform:uppercase;letter-spacing:0.01em;}
+  .divider{width:2.4rem;height:1px;background:var(--graphite);margin:3.2rem auto;}
+
+  .closing{padding:4rem 0 6rem;text-align:center;}
+  .closing h2{font-family:var(--display);text-transform:uppercase;font-weight:700;letter-spacing:0.02em;
+    font-size:clamp(1.5rem,5vw,2.1rem);line-height:1.2;margin-bottom:1rem;}
+  .closing p{max-width:38ch;margin-left:auto;margin-right:auto;color:var(--smoke);}
+  .btnrow{display:flex;flex-direction:column;gap:0.9rem;align-items:center;margin-top:2.2rem;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;max-width:22rem;
+    font-family:var(--display);text-transform:uppercase;letter-spacing:0.08em;font-size:0.85rem;font-weight:600;
+    padding:1rem 1.4rem;border-radius:2px;text-decoration:none;transition:opacity .2s;}
+  .btn:hover{opacity:0.85;}
+  .btn-primary{background:var(--ember);color:var(--ink);}
+  .btn-outline{border:1px solid var(--graphite);color:var(--bone);}
+  .followrow{display:flex;gap:0.8rem;justify-content:center;margin-top:2.6rem;flex-wrap:wrap;}
+  .follow{font-family:var(--display);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--smoke);text-decoration:none;border:1px solid var(--graphite);padding:0.7rem 1.1rem;border-radius:2px;}
+  .follow:hover{color:var(--bone);border-color:var(--smoke);}
+  footer{text-align:center;padding:2.5rem 1.5rem 3.5rem;color:var(--fog);font-family:var(--display);
+    font-size:0.68rem;letter-spacing:0.1em;}
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <img class="cover" src="/assets/hela-cover.jpg" alt="Portada de HELA" />
+    <p class="eyebrow">Antes de empezar</p>
+    <p class="surprise">No te vamos a regalar <span class="red">un</span> capítulo.<br/>Te vamos a regalar <span class="red">dos</span>.</p>
+    <p class="lede">Nadie te lo dijo cuando te suscribiste. Sorpresa.</p>
+    <p class="scrolldown">Sigue bajando</p>
+  </section>
+
+  <article class="wrap">
+
+    <div class="chapter">
+      <p class="chnum">01</p>
+      <p class="chtitle">Mara</p>
+      <p class="epigraph">Hay acciones que determinan<br/>si vas al cielo o al lago de fuego.</p>
+      <p class="meta">Martes 6 de abril · 3:08 a. m.</p>
+
+      <p class="lead">No sabe que la bala ya tiene su nombre.</p>
+
+      <p>Mara se retoca el maquillaje frente al retrovisor. El pecado cometido, todavía pegado a la piel.</p>
+      <p>El hombre que aprieta el gatillo no cambia el ritmo de la respiración. Está a escasos treinta centímetros de la ventana, empañada por el rocío. Es de madrugada en Ciudad Capital.</p>
+      <p>Ni un tropiezo, ni una duda. Un solo tiro. Mete la mano por el vidrio roto y se lleva el bolso de la mujer como quien recoge algo suyo. Después se desvanece en la penumbra, con el olor de la pólvora en los guantes. Aparece como un fantasma y se marcha igual. Atrás quedan el Mazda sedán último modelo, con el interior tiñéndose de rojo cereza, y el eco del disparo, que retumba hasta el tímpano del administrador del motel «Pela Rua».</p>
+      <p>El administrador es un viejo checo, alcohólico. A esa hora vomita los restos de las dos botellas de vodka barato que se bebe cada noche, solo con sus recuerdos.</p>
+      <p>El estruendo interrumpe su ritual. Un espasmo le sacude el brazo, todavía aferrado al inodoro mugriento de la recepción. Con la mano derecha se limpia la boca y usa las pocas fuerzas que le quedan para arrastrarse hasta la ventana que da al estacionamiento de los huéspedes.</p>
+      <p>Le toma varios parpadeos enfocar el sedán. El frío le recorre la espalda y se le lleva de un golpe el licor que tiene encima. Se olvida de respirar, con las manos quietas contra el vidrio. De repente, empujado por la adrenalina, se abalanza sobre el escritorio y, con la misma mano con la que se limpió la boca, agarra un celular destartalado.</p>
+      <p>—Línea de emergencia, ¿en qué le puedo colaborar? —pregunta una operadora con voz de sueño.</p>
+      <p>—¡Hay uno muerto en lo carro! —balbucea el hombre, mirando hacia todos lados para asegurarse de que el asesino no esté cerca—. ¡Hay uno muerto en lo carro!</p>
+      <p>—Deme su nombre y su ubicación para enviar una unidad —dice la mujer, que todavía no termina de despertarse.</p>
+      <p>—Motel «Pela Rua», avenida Libertad, kilómetro tres. Mi nombre es Blazej.</p>
+      <p>—¿Brased?</p>
+      <p>—¡Blazej!</p>
+      <p>—Perfecto, señor Brasel. ¿Puede usted ver al responsable?</p>
+      <p>—¡Blazej! —insiste—. No, no hay responsable.</p>
+      <p>—Señor Brasei, le voy a pedir que asegure las puertas del lugar donde se encuentra y que por ningún motivo se acerque al vehículo. Una patrulla ya va para allá. ¿Entendido?</p>
+      <p>—Sí, señoría.</p>
+      <p>Blazej corre hacia la puerta de la recepción, pasa un pequeño cerrojo, apaga la luz y se tira al piso junto a la ventana. Del bolsillo interior del abrigo saca una licorera abollada, repleta de whisky, y se empina la mitad, rezando en checo. Va a darse otro trago cuando ve, a lo lejos, las luces de un furgón viejo. Han pasado siete minutos. Cree que es la ayuda. Sin pensarlo, sale corriendo, con el vértigo en las piernas.</p>
+      <p>—¡Ayuda! ¡Ayuda! —grita, agitando los brazos frente al furgón, que frena para no arrollarlo—. ¡Allá! ¡Allá!</p>
+      <p>Señala el carro con el vidrio roto, la sangre salpicada en el tablero, escurriendo.</p>
+      <p>En la cabina van tres hombres. Se bajan. Muestran más interés por el entorno que por la víctima. Uno se agacha junto a las marcas húmedas del piso de ladrillo y las roza con dos dedos. No dice nada. Los otros dos esperan, inmóviles, sin necesitar instrucciones. Huellas de bota de obra, cuero con punta metálica, de hombre. Frescas. Apuntan hacia la entrada por la que acaba de llegar el furgón. Por ahí escapó el asesino con su botín.</p>
+      <p>Ninguno habla. Vuelven a subir y se van por donde llegaron, detrás de las huellas. Dejan a Blazej envuelto en el humo del exosto. El furgón se pierde en la niebla.</p>
+      <p>Blazej sigue ahí, petrificado, con la mirada perdida. La única señal de vida que hay en él es el vaho que le sale de los pulmones agitados. Cuando los dos policías llegan minutos después, atendiendo el llamado, del furgón ya no queda ni el eco del motor. Ellos no lo ven. Nadie más lo ve.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="chapter">
+      <p class="chnum">02</p>
+      <p class="chtitle">La cacería</p>
+      <p class="epigraph">A veces la vida es peor castigo<br/>que la mismísima muerte.</p>
+      <p class="meta">Martes 6 de abril · 3:21 a. m.</p>
+
+      <p class="lead">No es la primera vez que Los Lobos se toman la justicia por su cuenta.</p>
+
+      <p>Así los llaman en la calle. Les da igual la víctima, les da igual el crimen. Se alimentan del odio que deja un sistema podrido. Cazan en manada, con la jerarquía y la disciplina de un animal inteligente. Arriba está «El Doc.», el alfa. Les mete la venganza en la cabeza hasta que se vuelve dogma. No más impunidad.</p>
+      <p>De «El Doc.» se sabe poco. Para algunos es una leyenda urbana, inventada por los medios para meterle miedo a la delincuencia y presionar a una justicia corrupta e inepta. Lo cierto es que tiene creyentes. «Maco», «Pali» y «El Niño» son tres de ellos, los tres ocupantes del viejo furgón. Operan con método y discreción. Pueden pasar horas acechando a la presa sin moverse.</p>
+      <p>Esperan en un terreno alto hasta recibir una señal y luego bajan a hacer su trabajo. Las comunicaciones que interceptan les dan la delantera, y casi siempre llegan antes que la policía, lenta y negligente. Se acercan a la presa en silencio, cada uno por su lado, listos para el ataque. Este caso no es la excepción.</p>
+      <p>—¿Alguno lo ve? —pregunta Maco, pegado al timón, tratando de ver entre la neblina mientras conduce despacio, sin perder el rastro de las huellas que lo vienen guiando desde el motel hacia una de las comunas más peligrosas de la ciudad.</p>
+      <p>—No… —responde El Niño.</p>
+      <p>Le dicen así porque es el menor de Los Lobos. Casi siempre viaja en medio de los otros dos, con un computador sobre las piernas y programas que le permiten predecir rutas y triangular llamadas, entre otras cosas.</p>
+      <p>—¡A las tres! —grita Pali, con un tono que delata su entrenamiento militar, y señala un bote de basura en llamas a pocos metros.</p>
+      <p>Sin dudarlo, se baja con el furgón en movimiento. Da unos pasos en carrera y aprovecha el impulso para patear el contenedor, que se vuelca sobre la grama mojada por el rocío. Agarra tierra del árbol de al lado y la arroja encima de los objetos que apenas empiezan a arder. El gesto no solo llama la atención de sus compañeros. También alerta a la presa, que ya huía y se devuelve a mirar qué pasa. Por un segundo queda expuesta bajo un farol viejo. Es un hombre.</p>
+      <p>Maco frena en seco y se baja sin hacer ruido para cerrarle el paso. El hombre intenta escapar otra vez por una callecita que desemboca en la zona roja, un barrio de prostíbulos, venta de droga y comercio de armas donde la ley renunció a meterse hace años. Lo que la presa no sabe es que Los Lobos conocen la zona como la palma de la mano. Es su coto de caza favorito.</p>
+      <p>Mientras Pali y Maco le preparan la emboscada a la liebre asustada, El Niño deja a un lado sus equipos y va a revisar lo que quedó en el contenedor. Hurga entre las cenizas con cuidado. No quiere quemarse, y mucho menos destruir evidencia. Separa los objetos con un palo. Lo que la presa intentaba hacer desaparecer es un bolso de mujer. Adentro hay cosméticos de marca, una libreta con apuntes, una pluma fina, un llavero plateado y unos medicamentos recetados. Más abajo encuentra la cartera de la víctima, intacta, con los documentos y el dinero. No es un robo común. Es un asesinato premeditado.</p>
+      <p>Guarda en una bolsa lo que le sirve y vuelve a su puesto. En la pantalla hay un mapa con dos flechas verdes que se adentran en la comuna. Algunos cuadrantes aparecen resaltados en carmesí, las zonas críticas que deben evitar, y de vez en cuando surgen unos círculos blancos que generan pequeñas ondas. Son celulares buscando señal.</p>
+      <p>De pronto, las flechas dejan de avanzar y el radioteléfono del panel empieza a sonar.</p>
+      <p>—Perdí la visual —dice Maco, decepcionado.</p>
+      <p>—Yo igual. Tiene que estar en una madriguera. Niño, ¿actividad? —pregunta Pali.</p>
+      <p>—Nada —responde El Niño.</p>
+      <p>Examina la bolsa por fuera. La sacude para reacomodar lo que hay adentro, cambia de ángulo y se fija en una inscripción grabada en el respaldo del llavero. «Mara Vidal 3925243133». Abre una ventana nueva en el computador y escribe el nombre. Le salen miles de artículos.</p>
+      <p>—Este es uno grande, señores —dice, mientras lee los titulares y revisa las fotos—. La víctima es Mara Vidal. Periodista condecorada de El Confidencial, Pluma de Oro por la investigación de corrupción contra el candidato Valbuena en la campaña para la alcaldía.</p>
+      <p>—¡Upa! —suelta Maco—. Ya sé cuál es. El diablo la nombró hace unos meses jefa de comunicaciones de la alcaldía.</p>
+      <p>El diablo es el nombre clave que usan Los Lobos para Luis Ferguson, el polémico alcalde de Ciudad Capital y su principal objetivo militar. Bajo su gobierno la economía se hundió, con la pobreza y el hambre disparadas. Trajo violencia y criminalidad, y hoy es una de las ciudades más peligrosas del mundo.</p>
+      <p>—¿Seguro? —pregunta Pali por el radio.</p>
+      <p>—Cien por ciento —contesta El Niño, con la evidencia en la mano—. Ya tengo lo que la presa intentó quemar. Está la cartera y un llavero con…</p>
+      <p>Se interrumpe en seco.</p>
+      <p>—¿Un llavero con qué? —pregunta Maco.</p>
+      <p>—¡El teléfono! En sus cosas no está el celular.</p>
+      <p>Vuelve a abrir la aplicación de rastreo, digita el número del llavero y presiona llamar. Como por arte de magia, aparece un punto blanco con ondas a unos metros de Pali, que alcanza a oír la vibración del aparato.</p>
+      <p>—¡Está frente a la prendería El Diamante! —grita El Niño.</p>
+      <p>Maco rompe la calma con una maniobra de distracción. Tira un ladrillo contra las láminas de zinc que cubren las ventanas de la prendería. Como una rata nerviosa con el depredador en el cuello, el asesino intenta huir otra vez, sin darse cuenta de que Pali lo espera en la esquina con un palo grueso que recogió del suelo. El golpe en la cabeza es tan fuerte que lo deja inconsciente en el acto, como un muñeco de trapo.</p>
+      <p>Con la presa en el piso, Pali da las coordenadas por el radio.</p>
+      <p>—¡Lo tengo en Solís y Córdoba!</p>
+      <p>El Niño se pasa al timón y arranca. Cuando llega, se baja a abrir las puertas traseras, y Pali y Maco suben el trofeo al contenedor. Sin piedad, lo esposan de una sola mano a un tubo que atraviesa el techo de lado a lado, como un cerdo colgado en el frigorífico de una carnicería. Sellan la bodega, vuelven a sus puestos y se van por la vía destapada. Los pocos vecinos que se asoman cierran la ventana antes de que el furgón termine de pasar.</p>
+    </div>
+
+  </article>
+
+  <section class="closing">
+    <div class="wrap">
+      <h2>Esto apenas empieza.</h2>
+      <p>Quién es «El Doc.». Qué le pasó a Mara. Por qué Los Lobos no se equivocan de presa. Todo eso está en el resto de HELA — Lago de Fuego, Vol. I.</p>
+      <div class="btnrow">
+        <a class="btn btn-primary" href="https://www.andresrodrigueze.com/#comprar">Entérate cuando esté disponible</a>
+        <a class="btn btn-outline" href="/descargas/primer-capitulo-hela.pdf">Descargar estos capítulos en PDF</a>
+      </div>
+      <div class="followrow">
+        <a class="follow" href="https://www.tiktok.com/@andres_crimetoks" target="_blank" rel="noopener">Sígueme en TikTok</a>
+        <!-- PENDIENTE: agrega aquí tu link real de Instagram, mismo formato que el de arriba -->
+      </div>
+    </div>
+  </section>
+
+  <footer>HELA — Lago de Fuego, Vol. I · Andrés Rodríguez E.</footer>
+
+</body>
+</html>
