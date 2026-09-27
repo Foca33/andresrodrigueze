@@ -58,6 +58,7 @@ export function FirstChapterCTA() {
                 cta: c.cta,
                 sending: c.sending,
                 success: c.success,
+                successNote: c.successNote,
                 successSimulated: c.successSimulated,
                 error: c.error,
                 invalid: c.invalid,

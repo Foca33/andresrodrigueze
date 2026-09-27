@@ -14,6 +14,7 @@ interface Strings {
   cta: string;
   sending: string;
   success: string;
+  successNote?: string;
   successSimulated: string;
   error: string;
   invalid: string;
@@ -71,6 +72,9 @@ export function LeadForm({
     return (
       <div role="status" className={cn("py-6", className)}>
         <p className="display-italic text-[clamp(1.6rem,3vw,2.4rem)]">{strings.success}</p>
+        {!simulated && strings.successNote && (
+          <p className={cn("mono mt-2 !text-[0.72rem]", paper ? "text-ink/60" : "text-smoke")}>{strings.successNote}</p>
+        )}
         {simulated && <p className="mono mt-3 !text-[0.72rem] text-ember">{strings.successSimulated}</p>}
         {after && <div className="mt-8">{after}</div>}
       </div>
