@@ -273,7 +273,7 @@ export const es = {
 
   share: {
     label: "Compartir HELA",
-    lead: "¿Conoces a alguien que lea novela negra? Pásaselo.",
+    lead: "¿Conoces a alguien que debería leer HELA? Pásaselo.",
     cta: "Enviar por WhatsApp",
     text: "HELA — La ciudad no tiene nombre. Sus muertos, sí.",
     copied: "Enlace copiado",

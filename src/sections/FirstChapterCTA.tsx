@@ -46,7 +46,10 @@ export function FirstChapterCTA() {
                   <LinkButton href={primaryPurchaseAnchor} variant="paper" className="w-full sm:w-auto sm:min-w-[15rem]">
                     {copy.hero.ctaPrimary}
                   </LinkButton>
-                  <ShareButton location="first-chapter-success" className="border-ink/30 text-ink/80 hover:border-ink hover:text-ink" />
+                  <div className="flex flex-col items-start gap-2">
+                    <p className="mono !text-[0.72rem] text-ink/60">{copy.share.lead}</p>
+                    <ShareButton location="first-chapter-success" className="border-ink/30 text-ink/80 hover:border-ink hover:text-ink" />
+                  </div>
                 </div>
               }
               strings={{

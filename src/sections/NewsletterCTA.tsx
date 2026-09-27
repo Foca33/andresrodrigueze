@@ -71,7 +71,12 @@ export function NewsletterCTA() {
               <LeadForm
                 source="newsletter"
                 event="newsletter_signup"
-                after={<ShareButton location="newsletter-success" />}
+                after={
+                  <div className="flex flex-col items-start gap-2">
+                    <p className="mono !text-[0.72rem] text-fog">{copy.share.lead}</p>
+                    <ShareButton location="newsletter-success" />
+                  </div>
+                }
                 strings={{
                   email: c.email,
                   cta: c.cta,
