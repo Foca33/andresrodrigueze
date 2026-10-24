@@ -251,6 +251,7 @@ export const es = {
       dept: "Escribe tu departamento.",
       address: "Escribe la dirección completa.",
       consent: "Debes aceptar para continuar.",
+      closed: "Por ahora no estamos recibiendo pedidos del impreso. Vuelve pronto o escríbenos a info@andresrodrigueze.com.",
       server: "No pudimos registrar tu pedido. Intenta de nuevo en un momento o escríbenos a info@andresrodrigueze.com.",
     },
     done: {
@@ -345,6 +346,10 @@ export const es = {
       {
         h: "Para qué los usamos",
         p: "Para enviarte el primer capítulo y avisarte de HELA, de los próximos volúmenes de Lago de Fuego y de novedades del autor. Los datos de un pedido se usan solo para gestionar el pago, el envío y la atención de ese pedido. No vendemos ni cedemos tus datos; solo los comparte la transportadora que entrega el paquete.",
+      },
+      {
+        h: "Compra del libro impreso",
+        p: "La edición impresa se vende solo con envío dentro de Colombia, a $70.000 COP con envío incluido. El pago se hace en la página segura de Bold y el pedido queda confirmado cuando se acredita; te avisamos por correo cuando sale tu paquete. Derecho de retracto (artículo 47 de la Ley 1480 de 2011): puedes retractarte dentro de los cinco días hábiles siguientes a la entrega; te devolvemos el dinero pagado, a más tardar en 30 días calendario, y los costos de transporte de la devolución los asume el comprador. Para ejercer el retracto o presentar una petición, queja o reclamo, escríbenos al correo de contacto.",
       },
       {
         h: "Tus derechos",

@@ -17,6 +17,7 @@ import { siteConfig } from "@/config/site";
  *   BOLD_WEBHOOK_SECRET    — llave secreta de Bold (pruebas o producción, según el modo)
  *   BOLD_TEST_MODE         — "true" mientras pruebas; vacío o "false" en producción
  *   PAYMENT_LINK_URL       — (opcional) link fijo de Bold; respaldo si faltan las llaves de Bold
+ *   ORDERS_CLOSED          — "true" cierra los pedidos (por ejemplo, cuando se agotan las copias)
  */
 
 export const runtime = "nodejs";
@@ -81,6 +82,11 @@ export async function POST(req: Request) {
     order.address.length < 6
   ) {
     return NextResponse.json({ ok: false, error: "invalid" }, { status: 400 });
+  }
+
+  // Interruptor de emergencia: con ORDERS_CLOSED=true no se registra ni se cobra ningún pedido nuevo.
+  if (process.env.ORDERS_CLOSED === "true") {
+    return NextResponse.json({ ok: false, error: "closed" }, { status: 503 });
   }
 
   const webhook = process.env.ORDERS_WEBHOOK_URL;

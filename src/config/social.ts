@@ -50,7 +50,7 @@ export const socialLinks: Record<SocialId, { label: string; url: string }> = {
   instagram: { label: "Instagram", url: placeholderUrl("INSTAGRAM_URL") },
   goodreads: { label: "Goodreads", url: placeholderUrl("GOODREADS_URL") },
   facebook: { label: "Facebook", url: placeholderUrl("FACEBOOK_URL") },
-  email: { label: "Contacto", url: "mailto:[CONTACT_EMAIL]" },
+  email: { label: "Contacto", url: "mailto:info@andresrodrigueze.com" },
 };
 
 export const newsletter = {

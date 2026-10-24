@@ -33,7 +33,7 @@ export const siteConfig = {
     name: "Andrés Rodríguez Escobar",
     shortName: "Andrés Rodríguez E.",
     location: "Bogotá, Colombia",
-    email: "[CONTACT_EMAIL]",
+    email: "info@andresrodrigueze.com",
   },
 } as const;
 

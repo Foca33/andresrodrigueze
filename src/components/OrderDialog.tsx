@@ -137,12 +137,13 @@ export function OrderDialog() {
         testMode?: boolean;
         bold?: BoldData;
         payUrl?: string;
+        error?: string;
       };
       if (res.ok && json.ok && json.orderId && (json.bold || json.payUrl)) {
         track("order_submit", { city: data.city });
         setDone({ orderId: json.orderId, testMode: !!json.testMode, bold: json.bold, payUrl: json.payUrl });
       } else {
-        setErrors({ server: c.errors.server });
+        setErrors({ server: json.error === "closed" ? c.errors.closed : c.errors.server });
       }
     } catch {
       setErrors({ server: c.errors.server });
