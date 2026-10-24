@@ -7,10 +7,11 @@ import { Wordmark } from "@/components/brand/Wordmark";
 import { editions } from "@/config/retailers";
 import { isPlaceholderUrl, siteConfig } from "@/config/site";
 import { track } from "@/lib/analytics";
+import { openOrder } from "@/lib/order";
 import { PrivacyLink } from "@/components/PrivacyLink";
 import { ShareButton } from "@/components/ShareButton";
 
-const firstLink = (retailer: "amazon" | "buscalibre") =>
+const firstLink = (retailer: "amazon") =>
   editions.flatMap((e) => e.links).find((l) => l.retailer === retailer && l.enabled);
 
 /** Minimal. The page ends in darkness. */
@@ -18,11 +19,10 @@ export function Footer() {
   const copyAll = useCopy();
   const c = copyAll.footer;
   const amazon = firstLink("amazon");
-  const buscalibre = firstLink("buscalibre");
   const link = "inline-block border-b border-transparent py-2.5 text-bone/70 transition-colors hover:border-bone hover:text-bone";
 
   return (
-    <footer className="bg-[#030303] px-gutter pb-10 pt-[12svh]">
+    <footer className="bg-[#030303] px-gutter pb-28 pt-[12svh] md:pb-24">
       <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
         <div className="md:col-span-5">
           <Sigil className="mb-8 h-8 w-8 text-bone/80" />
@@ -35,6 +35,11 @@ export function Footer() {
 
         <nav aria-label="Enlaces" className="md:col-span-4 md:col-start-7">
           <ul className="mono grid grid-cols-2 gap-x-6 gap-y-0">
+            <li>
+              <button type="button" className={link} onClick={() => openOrder("footer")}>
+                {copyAll.order.footerLink}
+              </button>
+            </li>
             {amazon && (
               <li>
                 <a
@@ -45,21 +50,7 @@ export function Footer() {
                   title={siteConfig.showPlaceholderNotices && isPlaceholderUrl(amazon.url) ? "Enlace provisional" : undefined}
                   onClick={() => track("purchase_click_amazon", { location: "footer" })}
                 >
-                  Amazon
-                </a>
-              </li>
-            )}
-            {buscalibre && (
-              <li>
-                <a
-                  href={buscalibre.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={link}
-                  title={siteConfig.showPlaceholderNotices && isPlaceholderUrl(buscalibre.url) ? "Enlace provisional" : undefined}
-                  onClick={() => track("purchase_click_buscalibre", { location: "footer" })}
-                >
-                  Buscalibre
+                  Kindle
                 </a>
               </li>
             )}

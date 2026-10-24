@@ -60,3 +60,23 @@ export function SubmitButton({
     </button>
   );
 }
+
+/** Botón real (no enlace) con el mismo aspecto: abre diálogos. */
+export function ActionButton({
+  children,
+  onClick,
+  variant = "primary",
+  className,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  variant?: Variant;
+  className?: string;
+}) {
+  return (
+    <button type="button" onClick={onClick} className={cn(base, variants[variant], className)}>
+      <span>{children}</span>
+      <Arrow />
+    </button>
+  );
+}

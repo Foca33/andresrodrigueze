@@ -1,6 +1,7 @@
 import { SiteProvider } from "@/components/Providers";
 import { SiteNav } from "@/components/SiteNav";
-import { MobileBuyBar } from "@/components/MobileBuyBar";
+import { PrintOrderBar } from "@/components/PrintOrderBar";
+import { OrderDialog } from "@/components/OrderDialog";
 import { getCopy } from "@/content";
 import { getAssets } from "@/lib/assets";
 import { siteConfig } from "@/config/site";
@@ -87,7 +88,8 @@ export default async function Page() {
         <NewsletterCTA />
       </main>
       <Footer />
-      <MobileBuyBar />
+      <PrintOrderBar />
+      <OrderDialog />
       <PrivacyDialog />
       <Analytics />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

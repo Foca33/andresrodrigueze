@@ -11,12 +11,13 @@
 
 export type AnalyticsEvent =
   | "purchase_click_amazon"
-  | "purchase_click_buscalibre"
   | "purchase_click_kobo"
   | "purchase_click_apple"
   | "purchase_click_kindle"
   | "purchase_click_paperback"
-  | "purchase_click_hardcover"
+  | "order_open"
+  | "order_submit"
+  | "order_pay_click"
   | "hero_cta_click"
   | "hero_chapter_click"
   | "nav_buy_click"

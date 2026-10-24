@@ -37,6 +37,7 @@ export const es = {
     close: "Cerrar",
     skip: "Saltar al contenido",
     mobileBuy: "COMPRAR HELA",
+    orderBuy: "Pedir impreso",
   },
 
   hero: {
@@ -85,9 +86,12 @@ export const es = {
   editions: {
     label: "Ediciones",
     title: "Elige cómo entrar.",
-    lead: "Tres formatos. La misma historia. Compras directamente en la tienda que elijas; este sitio no procesa pagos.",
+    lead: "Dos formatos. La misma historia. El impreso lo pides aquí y llega a tu casa en Colombia. El Kindle lo compras en Amazon.",
     formatLegend: "Formato",
     retailerLegend: "Tienda",
+    orderLegend: "Pedido directo",
+    orderCta: "PEDIR HELA IMPRESA",
+    orderNote: "Envío incluido a toda Colombia. Pagas con Nequi, PSE o tarjeta. Solo se despacha dentro de Colombia.",
     pricePending: "Precio por confirmar",
     isbnLabel: "ISBN",
     isbnPending: "Por asignar",
@@ -220,9 +224,51 @@ export const es = {
     invalid: "Escribe un correo válido.",
   },
 
+  order: {
+    footerLink: "Pedir el impreso",
+    bar: { label: "HELA impresa", price: "$70.000 · envío incluido", only: "Solo Colombia", cta: "PEDIR" },
+    title: "Pide HELA impresa",
+    lead: "$70.000 COP con envío incluido. Solo enviamos dentro de Colombia.",
+    legend: "Datos de entrega",
+    fields: {
+      name: "Nombre completo",
+      email: "Correo",
+      phone: "Celular",
+      city: "Ciudad o municipio",
+      dept: "Departamento",
+      address: "Dirección",
+      notes: "Barrio, torre, apto o indicaciones (opcional)",
+    },
+    consent: "Confirmo que la dirección está en Colombia y autorizo usar estos datos para gestionar el pago y el envío de mi pedido.",
+    submit: "REGISTRAR Y PAGAR",
+    sending: "Registrando…",
+    close: "Cerrar",
+    errors: {
+      name: "Escribe tu nombre completo.",
+      email: "Escribe un correo válido.",
+      phone: "Escribe un celular colombiano de 10 dígitos.",
+      city: "Escribe tu ciudad o municipio.",
+      dept: "Escribe tu departamento.",
+      address: "Escribe la dirección completa.",
+      consent: "Debes aceptar para continuar.",
+      server: "No pudimos registrar tu pedido. Intenta de nuevo en un momento o escríbenos a info@andresrodrigueze.com.",
+    },
+    done: {
+      title: "Pedido registrado.",
+      id: "Número de pedido",
+      body: "Falta un paso: el pago. Se hace en la página segura de Bold, con Nequi, PSE o tarjeta débito o crédito. Tu pedido queda confirmado cuando se acredita el pago.",
+      pay: "PAGAR $70.000",
+      opening: "Abriendo el pago…",
+      testMode: "Modo pruebas · no se cobra dinero real",
+      payError: "No pudimos abrir el pago. Revisa tu conexión e inténtalo de nuevo; tu pedido ya quedó registrado.",
+      after: "Cuando salga tu paquete te avisamos al correo. Si no ves nuestro mensaje, revisa la carpeta de spam.",
+      keep: "Guarda tu número de pedido. Al pagar, usa el mismo nombre y correo que pusiste aquí.",
+    },
+  },
+
   strip: {
     title: "Ya conoces el lago.",
-    line: "HELA · Kindle · Tapa blanda · Tapa dura",
+    line: "HELA · Impreso en Colombia · Kindle",
     cta: "Comprar HELA",
   },
 
@@ -252,7 +298,7 @@ export const es = {
       },
       {
         q: "¿Dónde la compro y en qué formatos?",
-        a: "En Kindle, tapa blanda y tapa dura, en Amazon y Buscalibre. Compras directamente en la tienda; este sitio no procesa pagos. Precio y envío los define cada tienda.",
+        a: "El impreso cuesta $70.000 con envío incluido y lo pides aquí mismo, solo para Colombia. El Kindle lo compras en Amazon, desde cualquier país.",
       },
       {
         q: "¿Puedo leer un fragmento antes de comprar?",
@@ -294,11 +340,11 @@ export const es = {
       },
       {
         h: "Qué datos recogemos",
-        p: "Tu correo electrónico y, si lo escribes, tu nombre. También datos de navegación agregados (qué secciones se visitan y desde qué red social se llega) para entender qué funciona.",
+        p: "Tu correo electrónico y, si lo escribes, tu nombre. Si pides el libro impreso, también tu nombre completo, celular, ciudad, departamento y dirección de entrega. Además, datos de navegación agregados (qué secciones se visitan y desde qué red social se llega) para entender qué funciona.",
       },
       {
         h: "Para qué los usamos",
-        p: "Para enviarte el primer capítulo y avisarte de HELA, de los próximos volúmenes de Lago de Fuego y de novedades del autor. No vendemos ni cedemos tus datos.",
+        p: "Para enviarte el primer capítulo y avisarte de HELA, de los próximos volúmenes de Lago de Fuego y de novedades del autor. Los datos de un pedido se usan solo para gestionar el pago, el envío y la atención de ese pedido. No vendemos ni cedemos tus datos; solo los comparte la transportadora que entrega el paquete.",
       },
       {
         h: "Tus derechos",
@@ -306,13 +352,21 @@ export const es = {
       },
       {
         h: "Enlaces externos",
-        p: "Las compras se hacen en tiendas de terceros (Amazon, Buscalibre), que tienen sus propias políticas. Este sitio no procesa pagos.",
+        p: "El Kindle se compra en Amazon, que tiene sus propias políticas. El pago del libro impreso lo procesa Bold en su propia página; este sitio no guarda datos de tarjetas ni de cuentas.",
       },
       {
         h: "Aviso legal",
         p: "HELA es una obra de ficción. Cualquier parecido con hechos o personas reales es coincidencia. Todos los derechos reservados: queda prohibida la reproducción total o parcial del texto y de las portadas sin autorización del autor.",
       },
     ],
+  },
+
+  thanks: {
+    title: "Gracias.",
+    order: "Número de pedido",
+    body: "Si el pago fue aprobado, en unos minutos te llega un correo confirmando tu pedido. Puede tardar hasta unos 10 minutos. Si no lo ves, revisa la carpeta de spam.",
+    problem: "Si tuviste algún problema con el pago, escríbenos y lo resolvemos.",
+    cta: "Volver al inicio",
   },
 
   notFound: {

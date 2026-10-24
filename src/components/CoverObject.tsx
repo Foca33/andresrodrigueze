@@ -10,7 +10,6 @@ import { useReduced } from "@/components/motion/useReduced";
  * The book as an OBJECT. Format changes its physical cues:
  *  - kindle: flat, screen-lit
  *  - paperback: soft page edge
- *  - hardcover: cloth board + spine ridge
  * Pointer tilt is capped at ±5° and disabled for reduced motion / touch.
  */
 export function CoverObject({ format }: { format: FormatId }) {
@@ -49,16 +48,11 @@ export function CoverObject({ format }: { format: FormatId }) {
             kind="hela"
             sizes="(min-width: 768px) 30vw, 72vw"
             className={
-              format === "hardcover"
-                ? "shadow-[-10px_0_0_-2px_#1b1a19,0_50px_90px_-20px_rgba(0,0,0,0.9)]"
-                : format === "paperback"
-                  ? "shadow-[-3px_0_0_-1px_rgba(236,230,218,0.35),0_40px_80px_-20px_rgba(0,0,0,0.9)]"
-                  : "shadow-[0_0_0_1px_rgba(236,230,218,0.25),0_0_80px_-10px_rgba(236,230,218,0.18)]"
+              format === "paperback"
+                ? "shadow-[-3px_0_0_-1px_rgba(236,230,218,0.35),0_40px_80px_-20px_rgba(0,0,0,0.9)]"
+                : "shadow-[0_0_0_1px_rgba(236,230,218,0.25),0_0_80px_-10px_rgba(236,230,218,0.18)]"
             }
           />
-          {format === "hardcover" && (
-            <div aria-hidden className="pointer-events-none absolute inset-y-0 left-[3.5%] w-px bg-black/60 shadow-[1px_0_0_rgba(255,255,255,0.14)]" />
-          )}
           {format === "paperback" && (
             <div
               aria-hidden

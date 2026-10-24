@@ -4,6 +4,9 @@ import { useId, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { defaultEdition, editions, enabledLinks, type FormatId } from "@/config/retailers";
 import { RetailerButton } from "@/components/RetailerButton";
+import { ActionButton } from "@/components/ui/Button";
+import { openOrder } from "@/lib/order";
+import { track } from "@/lib/analytics";
 import { CoverObject } from "@/components/CoverObject";
 import { useCopy } from "@/components/Providers";
 import { cn } from "@/lib/cn";
@@ -77,7 +80,7 @@ export function EditionSelector() {
         </div>
 
         <div className="mt-10">
-          <p className="mono mb-4 text-smoke">{copy.retailerLegend}</p>
+          <p className="mono mb-4 text-smoke">{edition.order ? copy.orderLegend : copy.retailerLegend}</p>
           <AnimatePresence mode="wait">
             <motion.ul
               key={format}
@@ -87,11 +90,26 @@ export function EditionSelector() {
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="grid max-w-xl grid-cols-1 gap-3"
             >
-              {links.map((l, i) => (
-                <li key={l.retailer}>
-                  <RetailerButton edition={edition} link={l} primary={i === 0} />
+              {edition.order ? (
+                <li>
+                  <ActionButton
+                    className="w-full"
+                    onClick={() => {
+                      track("purchase_click_paperback", { format: edition.id, retailer: "directo" });
+                      openOrder("editions");
+                    }}
+                  >
+                    {copy.orderCta}
+                  </ActionButton>
+                  <p className="mono mt-3 !text-[0.72rem] text-smoke">{copy.orderNote}</p>
                 </li>
-              ))}
+              ) : (
+                links.map((l, i) => (
+                  <li key={l.retailer}>
+                    <RetailerButton edition={edition} link={l} primary={i === 0} />
+                  </li>
+                ))
+              )}
             </motion.ul>
           </AnimatePresence>
           {edition.isbn && (

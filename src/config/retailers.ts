@@ -1,7 +1,7 @@
 import { placeholderUrl } from "./site";
 
-export type FormatId = "kindle" | "paperback" | "hardcover";
-export type RetailerId = "amazon" | "buscalibre" | "kobo" | "apple";
+export type FormatId = "kindle" | "paperback";
+export type RetailerId = "amazon" | "kobo" | "apple";
 
 export interface Retailer {
   id: RetailerId;
@@ -10,7 +10,6 @@ export interface Retailer {
 
 export const retailers: Record<RetailerId, Retailer> = {
   amazon: { id: "amazon", name: "Amazon" },
-  buscalibre: { id: "buscalibre", name: "Buscalibre" },
   kobo: { id: "kobo", name: "Kobo" },
   apple: { id: "apple", name: "Apple Books" },
 };
@@ -33,48 +32,42 @@ export interface Edition {
   price: string | null;
   /** [ISBN] */
   isbn: string | null;
+  /** true → no tienda externa: el botón abre el formulario de pedido (venta directa, solo Colombia). */
+  order?: boolean;
   links: RetailerLink[];
 }
 
+/** Venta directa de la edición impresa. Cambia el precio aquí y en content/es.ts (order.priceLine). */
+export const printOrder = {
+  priceCop: 70000,
+  priceLabel: "$70.000",
+} as const;
+
 /**
- * EDITIONS — status: NOT PUBLISHED YET (KDP pending).
- * Every url below is a TEMPORARY PLACEHOLDER → https://example.com/?placeholder=TOKEN
- * To go live: replace each placeholderUrl("...") with the real URL and set enabled: true
- * on the retailers you want visible. No component changes required.
+ * EDITIONS
+ *  - Impreso: venta directa en Colombia (formulario + pago por Bold). Ver components/OrderDialog.tsx.
+ *  - Kindle: enlace real de Amazon. Kobo / Apple Books quedan ocultos hasta tener URL.
  */
 export const editions: Edition[] = [
+  {
+    id: "paperback",
+    label: "Impreso",
+    descriptor: "Solo Colombia",
+    price: "$70.000 · envío incluido",
+    isbn: null,
+    order: true,
+    links: [],
+  },
   {
     id: "kindle",
     label: "Kindle",
     descriptor: "Edición digital",
-    price: null, // [KINDLE_PRICE]
-    isbn: null, // [ISBN]
+    price: null,
+    isbn: null,
     links: [
-      { retailer: "amazon", url: placeholderUrl("AMAZON_URL_KINDLE"), enabled: true, cta: "LEER EN KINDLE" },
+      { retailer: "amazon", url: "https://a.co/d/0cluVThd", enabled: true, cta: "LEER EN KINDLE" },
       { retailer: "kobo", url: placeholderUrl("KOBO_URL"), enabled: false },
       { retailer: "apple", url: placeholderUrl("APPLE_BOOKS_URL"), enabled: false },
-    ],
-  },
-  {
-    id: "paperback",
-    label: "Paperback",
-    descriptor: "Tapa blanda",
-    price: null, // [PAPERBACK_PRICE]
-    isbn: null,
-    links: [
-      { retailer: "amazon", url: placeholderUrl("AMAZON_URL_PAPERBACK"), enabled: true },
-      { retailer: "buscalibre", url: placeholderUrl("BUSCALIBRE_URL_PAPERBACK"), enabled: true },
-    ],
-  },
-  {
-    id: "hardcover",
-    label: "Hardcover",
-    descriptor: "Tapa dura",
-    price: null, // [HARDCOVER_PRICE]
-    isbn: null,
-    links: [
-      { retailer: "amazon", url: placeholderUrl("AMAZON_URL_HARDCOVER"), enabled: true },
-      { retailer: "buscalibre", url: placeholderUrl("BUSCALIBRE_URL_HARDCOVER"), enabled: true },
     ],
   },
 ];
