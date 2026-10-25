@@ -95,7 +95,7 @@ export function EditionSelector() {
                   <ActionButton
                     className="w-full"
                     onClick={() => {
-                      track("purchase_click_paperback", { format: edition.id, retailer: "directo" });
+                      track("purchase_click_paperback", { format: edition.id, retailer: "directo", location: "editions" });
                       openOrder("editions");
                     }}
                   >

@@ -48,7 +48,10 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className={link}
                   title={siteConfig.showPlaceholderNotices && isPlaceholderUrl(amazon.url) ? "Enlace provisional" : undefined}
-                  onClick={() => track("purchase_click_amazon", { location: "footer" })}
+                  onClick={() => {
+                    track("purchase_click_kindle", { format: "kindle", retailer: "amazon", location: "footer" });
+                    track("purchase_click_amazon", { format: "kindle", retailer: "amazon", location: "footer" });
+                  }}
                 >
                   Kindle
                 </a>

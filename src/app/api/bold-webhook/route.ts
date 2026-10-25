@@ -33,6 +33,28 @@ interface BoldEvent {
   };
 }
 
+/** Evento "order_paid" a PostHog (opcional: solo si hay clave). Nunca debe tumbar el aviso de pago. */
+async function sendSaleToPosthog(orderId: string, amount: number, method: string) {
+  const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+  if (!key) return;
+  const host = process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
+  try {
+    await fetch(`${host.replace(/\/$/, "")}/capture/`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        api_key: key,
+        event: "order_paid",
+        distinct_id: orderId,
+        properties: { orderId, value: amount, currency: "COP", method, $process_person_profile: false },
+      }),
+      signal: AbortSignal.timeout(700),
+    });
+  } catch {
+    /* la analítica es un extra: si falla, el pago igual quedó registrado */
+  }
+}
+
 export async function POST(req: Request) {
   const raw = await req.text();
   const testMode = process.env.BOLD_TEST_MODE === "true";
@@ -85,11 +107,18 @@ export async function POST(req: Request) {
         paymentId: ev.data?.payment_id ?? ev.subject ?? "",
         amount: ev.data?.amount?.total ?? 0,
         method: ev.data?.payment_method ?? "",
+        // En pruebas, el botón "Probar el webhook" de Bold manda un ejemplo con monto 0 e id "XXXX":
+        // el script solo omite el control de monto cuando este indicador es verdadero.
+        test: testMode,
       }),
       signal: AbortSignal.timeout(1800),
     });
-    const json = (await res.json().catch(() => null)) as { ok?: boolean } | null;
+    const json = (await res.json().catch(() => null)) as { ok?: boolean; duplicate?: boolean; unchanged?: boolean } | null;
     if (!res.ok || !json?.ok) throw new Error(`apps script ${res.status}`);
+    // Venta confirmada (y no repetida): se registra en PostHog para ver el embudo completo hasta el pago.
+    if (type === "SALE_APPROVED" && !json.duplicate && !json.unchanged && !testMode) {
+      await sendSaleToPosthog(reference, ev.data?.amount?.total ?? 0, ev.data?.payment_method ?? "");
+    }
   } catch (err) {
     // 500 → Bold reintenta (a los 15 min, 1 h, 4 h…). El script no duplica avisos.
     console.error("[bold-webhook] No se pudo registrar el pago de", reference, err);
