@@ -30,6 +30,8 @@ export type AnalyticsEvent =
   | "share_click"
   | "privacy_open"
   | "scroll_depth"
+  | "engaged_30s"
+  | "engaged_60s"
   | "tiktok_click"
   | "instagram_click"
   | "goodreads_click"
@@ -86,10 +88,32 @@ export function captureAttribution() {
   }
 }
 
+/**
+ * PostHog se carga bajo demanda (components/Analytics.tsx). Los eventos que ocurren antes de que
+ * termine de cargar se guardan en una cola corta y se envían cuando está listo.
+ */
+interface PostHogLike {
+  capture: (event: string, props?: Record<string, unknown>) => void;
+}
+let posthogClient: PostHogLike | null = null;
+const pending: Array<[string, Record<string, unknown>]> = [];
+
+export function setPosthog(client: PostHogLike) {
+  posthogClient = client;
+  pending.splice(0).forEach(([e, p]) => client.capture(e, p));
+}
+
+/** true cuando hay clave de PostHog configurada: solo entonces se encola y se envía. */
+export const posthogEnabled = Boolean(process.env.NEXT_PUBLIC_POSTHOG_KEY);
+
 export function track(event: AnalyticsEvent, params: Params = {}) {
   if (typeof window === "undefined") return;
   try {
     const payload = { ...getAttribution(), ...params };
+    if (posthogEnabled) {
+      if (posthogClient) posthogClient.capture(event, payload);
+      else if (pending.length < 50) pending.push([event, payload]);
+    }
     window.dataLayer?.push({ event, ...payload });
     window.gtag?.("event", event, payload);
     window.plausible?.(event, { props: payload });
