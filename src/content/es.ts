@@ -341,7 +341,7 @@ export const es = {
       },
       {
         h: "Qué datos recogemos",
-        p: "Tu correo electrónico y, si lo escribes, tu nombre. Si pides el libro impreso, también tu nombre completo, celular, ciudad, departamento y dirección de entrega. Además, datos de navegación agregados (qué secciones se visitan y desde qué red social se llega) para entender qué funciona.",
+        p: "Tu correo electrónico y, si lo escribes, tu nombre. Si pides el libro impreso, también tu nombre completo, celular, ciudad, departamento y dirección de entrega. Además, datos de navegación (qué secciones se visitan, cuánto tiempo, en qué botones se hace clic y desde qué red social se llega), que medimos con PostHog, sin cookies publicitarias y sin identificarte, para entender qué funciona.",
       },
       {
         h: "Para qué los usamos",

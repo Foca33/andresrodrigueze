@@ -27,7 +27,7 @@ export function RetailerButton({ edition, link, primary }: { edition: Edition; l
         data-format={edition.id}
         data-placeholder={placeholder || undefined}
         onClick={() => {
-          const params = { format: edition.id, retailer: link.retailer, placeholder };
+          const params = { format: edition.id, retailer: link.retailer, placeholder, location: "editions" };
           track(`purchase_click_${edition.id}` as AnalyticsEvent, params);
           track(`purchase_click_${link.retailer}` as AnalyticsEvent, params);
         }}
